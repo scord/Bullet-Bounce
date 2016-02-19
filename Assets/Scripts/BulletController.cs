@@ -2,13 +2,14 @@
 using System.Collections;
 
 public class BulletController : MonoBehaviour {
-    public int speed;
+    public float speed;
     Collider2D coll;
     GameObject player;
     Vector3 dir;
 
     // Use this for initialization
     void Start () {
+        print("bullet created");
         coll = gameObject.GetComponent<Collider2D>();
         player = GameObject.FindWithTag("Player");
         dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
@@ -22,16 +23,16 @@ public class BulletController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        gameObject.transform.Translate(dir * speed/10);    
+        gameObject.transform.Translate(dir * speed / 10f);
     }
 
-    void onTriggerEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
+        print("test");
         if (coll.gameObject.tag == "Player")
         {
             print("hit");
             dir = -dir;
-            gameObject.transform.position = coll.transform.position;
         }
     }
 
