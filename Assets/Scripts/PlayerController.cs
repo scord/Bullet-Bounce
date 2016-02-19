@@ -3,12 +3,16 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+    public BulletController bullet;
+
     public float speed;
     public float jumpPower;
     Rigidbody2D rigidbody;
     Collider2D collider;
     public GameObject shield;
     bool grounded = false;
+
+    float timer = 0f;
     // Use this for initialization
     void Start () {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -18,7 +22,12 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
+        timer += Time.deltaTime;
+        if (timer > 1)
+        {
+            timer = 0f;
+            Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
+        }
 	}
 
 
@@ -55,6 +64,7 @@ public class PlayerController : MonoBehaviour {
             Vector3 direction = new Vector3(-moveShieldX, moveShieldY, 0);
             shield.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         }
+
 
     }
 
