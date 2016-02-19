@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower;
     Rigidbody2D rigidbody;
     Collider2D collider;
+
+    public BulletController bullet;
+
     bool grounded = false;
     // Use this for initialization
     void Start () {
@@ -16,7 +19,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
+        if (Input.GetKeyDown("f"))
+        {
+            Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
+        }
 	}
 
     void OnCollisionEnter2D(Collider2D collider)
