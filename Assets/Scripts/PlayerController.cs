@@ -31,12 +31,15 @@ public class PlayerController : MonoBehaviour {
         rigidbody.velocity = new Vector2(speed * moveHorizontal, gameObject.GetComponent<Rigidbody2D>().velocity.y );
 
 
-        if (Input.GetButtonDown("Fire1"))
+        if (grounded && Input.GetButtonDown("Fire1"))
         {
             rigidbody.AddForce(new Vector2(0, jumpPower));
         }
 
-     
+        if (collider.IsTouchingLayers())
+            grounded = true;
+        else
+            grounded = false;
 
 
     }
