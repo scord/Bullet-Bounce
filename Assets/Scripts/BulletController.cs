@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour {
         gameObject.transform.Translate(dir * speed/10);    
     }
 
-    void onCollisionEnter2D(Collision2D coll)
+    void onTriggerEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Player")
         {
@@ -34,4 +34,5 @@ public class BulletController : MonoBehaviour {
             gameObject.transform.position = coll.transform.position;
         }
     }
+
 }
