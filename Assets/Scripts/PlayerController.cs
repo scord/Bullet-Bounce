@@ -45,6 +45,15 @@ public class PlayerController : MonoBehaviour {
             rigidbody.AddForce(new Vector2(0, jumpPower));
         }
 
+        if (shield.GetComponent<ShieldController>().collision)
+        {
+  
+            Vector3 rot = shield.gameObject.transform.up;
+            Debug.Log(rot);
+            
+            rigidbody.AddForce(rot*jumpPower);
+        }
+
         if (Mathf.Abs(moveShieldX) + Mathf.Abs(moveShieldY) >= 1)
         {
             Vector3 direction = new Vector3(-moveShieldX, moveShieldY, 0);
