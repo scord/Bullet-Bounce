@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class BulletController : MonoBehaviour {
+    const int MAX_DISTANCE = 30;
     public float speed;
     Collider2D coll;
     GameObject player;
@@ -24,6 +25,10 @@ public class BulletController : MonoBehaviour {
     void FixedUpdate()
     {
         gameObject.transform.Translate(dir * speed / 10f);
+        if (gameObject.transform.position.magnitude > MAX_DISTANCE)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
