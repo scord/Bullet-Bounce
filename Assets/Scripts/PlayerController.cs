@@ -21,10 +21,6 @@ public class PlayerController : MonoBehaviour {
 	    
 	}
 
-    void OnCollisionEnter2D(Collider2D collider)
-    {
-     
-    }
 
     void FixedUpdate()
     {
