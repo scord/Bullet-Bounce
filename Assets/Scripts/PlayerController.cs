@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour {
     bool grounded = false;
     public GameObject sprite;
     float timer = 0f;
-    float bounceTimer = 0f;
-    
+    float bounceTimer = 10f;
+    Vector2 acceleration = Vector2.zero;
+    Vector2 decceleration = new Vector2(0.5f,0);
     // Use this for initialization
     void Start () {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -57,10 +58,32 @@ public class PlayerController : MonoBehaviour {
 
         camera.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10);
         
-        if (bounceTimer > 0.25f && (grounded || Mathf.Abs(moveHorizontal) >= 0.1))
-            rigidbody.velocity = new Vector2(speed * moveHorizontal, rigidbody.velocity.y );
-   
-         
+        if (grounded || Mathf.Abs(moveHorizontal) >= 0.0)
+            acceleration = new Vector2(moveHorizontal*(bounceTimer), 0 );
+        
+        if (grounded && Mathf.Abs(moveHorizontal) <= 0.1)
+        {
+            if (rigidbody.velocity.x < 0)
+            {
+                rigidbody.velocity += decceleration*bounceTimer;
+
+                if (rigidbody.velocity.x > 0)
+                    rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+            }
+            if (rigidbody.velocity.x > 0)
+            {
+                rigidbody.velocity -= decceleration*bounceTimer;
+                if (rigidbody.velocity.x < 0)
+                    rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+            }
+        }
+
+        rigidbody.velocity += acceleration/2;
+
+        if (rigidbody.velocity.x > speed)
+            rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+        else if (rigidbody.velocity.x < -speed)
+            rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
 
         sprite.transform.Rotate(new Vector3(0, 0, -2*speed * moveHorizontal));
         
@@ -129,7 +152,8 @@ public class PlayerController : MonoBehaviour {
             Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
         }
 
-        bounceTimer += Time.fixedDeltaTime;
+        if (bounceTimer < 10f)
+            bounceTimer += Time.fixedDeltaTime;
     }
 
 }

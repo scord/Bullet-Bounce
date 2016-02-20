@@ -43,6 +43,10 @@ public class BulletController : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
+            if (hit.collider.gameObject.tag == "Power")
+            {
+                hit.collider.gameObject.GetComponent<PowerBoxController>().Destroy();
+            }
         }
         gameObject.transform.Translate(dir * speed);
         if (gameObject.transform.position.magnitude > MAX_DISTANCE)
