@@ -24,7 +24,7 @@ public class PowerBoxController : MonoBehaviour {
         destroyed = true;
         transform.rotation = Quaternion.Euler(0, 0, 180);
         explosion.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z -0.1f);
-        
+
         GameObject e = Instantiate(explosion);
   
    

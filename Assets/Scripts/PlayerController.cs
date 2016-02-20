@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float jumpPower;
     Rigidbody2D rigidbody;
+    public GameObject explosion;
     Collider2D collider;
     public Camera camera;
     public GameObject shield;
@@ -161,6 +162,13 @@ public class PlayerController : MonoBehaviour {
 
  
 
+    }
+
+    public void Destroy()
+    {
+        explosion.transform.position = gameObject.transform.position;
+        Instantiate(explosion);
+        Destroy(gameObject);
     }
 
     void resetPlayer()

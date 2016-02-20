@@ -17,10 +17,20 @@ public class BulletController : MonoBehaviour {
 
         player = GameObject.FindWithTag("Player");
         shield = GameObject.FindWithTag("Shield");
-        playerRigid = player.GetComponent<Rigidbody2D>();
-        playerControl = player.GetComponent<PlayerController>();
-        shieldEdge = shield.GetComponent<EdgeCollider2D>();
-        dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
+
+        if (player)
+        {
+            playerRigid = player.GetComponent<Rigidbody2D>();
+
+
+            playerControl = player.GetComponent<PlayerController>();
+            shieldEdge = shield.GetComponent<EdgeCollider2D>();
+            dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
+        }
+        else
+        {
+            dir = Vector3.right;
+        }
         
 	}
 	
@@ -51,6 +61,11 @@ public class BulletController : MonoBehaviour {
             if (hit.collider.gameObject.tag == "Power")
             {
                 hit.collider.gameObject.GetComponent<PowerBoxController>().Destroy();
+            }
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                hit.collider.gameObject.GetComponent<PlayerController>().Destroy();
+                Destroy(gameObject);
             }
         }
         gameObject.transform.Translate(dir * speed);
