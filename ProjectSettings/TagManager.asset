@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shield
   - Floor
+  - Turret
   layers:
   - Default
   - TransparentFX

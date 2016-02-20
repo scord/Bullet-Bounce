@@ -26,6 +26,7 @@ public class ShieldController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        collision = true;
+        if (other.tag == "Floor")
+            collision = true;
     }
 }

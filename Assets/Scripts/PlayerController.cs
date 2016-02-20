@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour {
 
         if (shield.GetComponent<ShieldController>().collision)
         {
-                
             Vector3 rot = shield.gameObject.transform.up;
             //Debug.Log(rot);
             
@@ -129,7 +128,16 @@ public class PlayerController : MonoBehaviour {
             Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
         }
 
+        if (Input.GetKeyDown("r"))
+        {
+            resetPlayer();
+        }
+
         bounceTimer += Time.fixedDeltaTime;
     }
 
+    void resetPlayer()
+    {
+        gameObject.transform.position = new Vector3(1, 0.5f, 1.23f);
+    }
 }
