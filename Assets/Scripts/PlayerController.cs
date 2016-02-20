@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower;
     Rigidbody2D rigidbody;
     Collider2D collider;
+    public Camera camera;
     public GameObject shield;
     bool grounded = false;
     public GameObject sprite;
     float timer = 0f;
+    float bounceTimer = 0f;
+    
     // Use this for initialization
     void Start () {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -24,6 +27,26 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 	}
+   
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        grounded = false;
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (gameObject.transform.position.y > contact.point.y)
+                grounded = true;
+        } 
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        grounded = false;
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (gameObject.transform.position.y > contact.point.y)
+                grounded = true;
+        }
+    }
 
 
     void FixedUpdate()
@@ -31,16 +54,17 @@ public class PlayerController : MonoBehaviour {
         string[] gamepads = Input.GetJoystickNames();
         
         float moveHorizontal = Input.GetAxis("Horizontal");
-        
 
-        if (Mathf.Abs(moveHorizontal) >= 0.1)
-            rigidbody.velocity = new Vector2(speed * moveHorizontal, gameObject.GetComponent<Rigidbody2D>().velocity.y );
+        camera.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10);
+        
+        if (bounceTimer > 0.25f && (grounded || Mathf.Abs(moveHorizontal) >= 0.1))
+            rigidbody.velocity = new Vector2(speed * moveHorizontal, rigidbody.velocity.y );
+   
+         
 
         sprite.transform.Rotate(new Vector3(0, 0, -2*speed * moveHorizontal));
-
-        if (collider.IsTouchingLayers())
-            grounded = true;
-        else
+        
+        if (!collider.IsTouchingLayers())
             grounded = false;
 
         if (grounded && Input.GetAxis("Fire1") > 0.5f)
@@ -55,6 +79,7 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log(rot);
             
             rigidbody.velocity = (rot*jumpPower*2f);
+            bounceTimer = 0;
         }
 
         if (gamepads.Length > 0)
@@ -92,7 +117,7 @@ public class PlayerController : MonoBehaviour {
             Quaternion rotate = Quaternion.Euler(new Vector3(0, 0, angle));
             if (!grounded)
                 shield.transform.rotation = rotate;
-            else if (angle < 90 && angle > 0)
+            else if (angle < 90 && angle > 0) 
                 shield.transform.rotation = Quaternion.Euler(0, 0, 90);
             else if (angle > 270 || angle < 0)
                 shield.transform.rotation = Quaternion.Euler(0, 0, 270);
@@ -104,6 +129,7 @@ public class PlayerController : MonoBehaviour {
             Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
         }
 
+        bounceTimer += Time.fixedDeltaTime;
     }
 
 }

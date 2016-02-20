@@ -2531,3 +2531,7 @@ Joystick disconnected ("Controller (Xbox 360 Wireless Receiver for Windows)").
  
 (Filename:  Line: 1260)
 
+Joystick reconnected ("Controller (Xbox 360 Wireless Receiver for Windows)").
+ 
+(Filename:  Line: 1325)
+
