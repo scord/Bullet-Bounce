@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     Collider2D collider;
     public GameObject shield;
     bool grounded = false;
-
+    public GameObject sprite;
     float timer = 0f;
     // Use this for initialization
     void Start () {
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         if (timer > 1)
         {
             timer = 0f;
-            Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
+            //Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
         }
 	}
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 
         
         rigidbody.velocity = new Vector2(speed * moveHorizontal, gameObject.GetComponent<Rigidbody2D>().velocity.y );
-
+        sprite.transform.Rotate(new Vector3(0, 0, -2*speed * moveHorizontal));
         if (collider.IsTouchingLayers())
             grounded = true;
         else
