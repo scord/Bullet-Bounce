@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
+
 --- !u!212 &21236670
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -133,6 +134,9 @@ SpriteRenderer:
   m_Color: {r: 1, g: 0.24264705, b: 0.24264705, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  dir: {x: -1, y: 0, z: 0}
+  followTarget: 0
+
 --- !u!212 &21244446
 SpriteRenderer:
   m_ObjectHideFlags: 1
