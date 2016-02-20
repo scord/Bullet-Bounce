@@ -39,6 +39,10 @@ public class BulletController : MonoBehaviour {
             {
                 dir = Vector3.Reflect(dir, hit.normal);
             }
+            if (hit.collider.gameObject.tag == "Floor")
+            {
+                Destroy(gameObject);
+            }
         }
         gameObject.transform.Translate(dir * speed);
         if (gameObject.transform.position.magnitude > MAX_DISTANCE)

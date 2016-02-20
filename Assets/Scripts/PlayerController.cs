@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour {
             mousePos.y = mousey - playerPos.y;
             float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg + 90;
             Quaternion rotate = Quaternion.Euler(new Vector3(0, 0, angle));
-            print(angle);
             if (!grounded)
                 shield.transform.rotation = rotate;
             else if (angle < 90 && angle > 0)
@@ -104,7 +103,6 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetKeyDown("f"))
         {
-
             Instantiate(bullet, new Vector3(2f, 0.5f), Quaternion.identity);
         }
 
