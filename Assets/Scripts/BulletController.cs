@@ -2,55 +2,48 @@
 using System.Collections;
 
 public class BulletController : MonoBehaviour {
-    const int MAX_DISTANCE = 30;
+    const int MAX_DISTANCE = 20;
     public float speed;
     Collider2D coll;
     GameObject player;
     Vector3 dir;
-
+    GameObject shield;
+    EdgeCollider2D shieldEdge;
+    PlayerController playerControl;
+    Rigidbody2D playerRigid;
     // Use this for initialization
     void Start () {
         coll = gameObject.GetComponent<Collider2D>();
+
         player = GameObject.FindWithTag("Player");
+        shield = GameObject.FindWithTag("Shield");
+        playerRigid = player.GetComponent<Rigidbody2D>();
+        playerControl = player.GetComponent<PlayerController>();
+        shieldEdge = shield.GetComponent<EdgeCollider2D>();
         dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
         
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
-	}
+        
+    }
 
     void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y), dir, speed*Time.deltaTime);
+        float dotp = Vector3.Dot(playerRigid.velocity, dir);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, dir, speed*2);
         if (hit.collider != null)
         {
-            print(hit.collider.name.ToString());
-            TriggerHit(hit.collider);   
+            if (hit.collider.gameObject.tag == "Shield")
+            {
+                dir = Vector3.Reflect(dir, hit.normal);
+            }
         }
         gameObject.transform.Translate(dir * speed);
         if (gameObject.transform.position.magnitude > MAX_DISTANCE)
         {
             Destroy(gameObject);
-        }
-    }
-
-    //void OnTriggerEnter2D(Collider2D coll)
-    //{
-    //    if (coll.gameObject.tag == "Shield")
-    //    {
-    //        print("hitold");
-    //        dir = -dir;
-    //    }
-    //}
-
-    void TriggerHit(Collider2D coll)
-    {
-        if (coll.gameObject.tag == "Shield")
-        {
-            print("hitnew");
-            dir = -dir;
         }
     }
 
