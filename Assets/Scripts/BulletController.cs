@@ -10,7 +10,6 @@ public class BulletController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        print("bullet created");
         coll = gameObject.GetComponent<Collider2D>();
         player = GameObject.FindWithTag("Player");
         dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
@@ -24,19 +23,33 @@ public class BulletController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        gameObject.transform.Translate(dir * speed / 10f);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y), dir, speed*Time.deltaTime);
+        if (hit.collider != null)
+        {
+            print(hit.collider.name.ToString());
+            TriggerHit(hit.collider);   
+        }
+        gameObject.transform.Translate(dir * speed);
         if (gameObject.transform.position.magnitude > MAX_DISTANCE)
         {
             Destroy(gameObject);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    //void OnTriggerEnter2D(Collider2D coll)
+    //{
+    //    if (coll.gameObject.tag == "Shield")
+    //    {
+    //        print("hitold");
+    //        dir = -dir;
+    //    }
+    //}
+
+    void TriggerHit(Collider2D coll)
     {
-        print("test");
-        if (coll.gameObject.tag == "Player")
+        if (coll.gameObject.tag == "Shield")
         {
-            print("hit");
+            print("hitnew");
             dir = -dir;
         }
     }
