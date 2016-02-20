@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public BulletController bullet;
-
+    public bool killable;
     public float speed;
     public float jumpPower;
     Rigidbody2D rigidbody;
@@ -174,5 +174,10 @@ public class PlayerController : MonoBehaviour {
     void resetPlayer()
     {
         gameObject.transform.position = new Vector3(1, 0.5f, 1.23f);
+    }
+
+    public bool getKillable()
+    {
+        return killable;
     }
 }

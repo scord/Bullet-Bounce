@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
+  dir: {x: -1, y: 0, z: 0}
+  followTarget: 0
 --- !u!212 &21244446
 SpriteRenderer:
   m_ObjectHideFlags: 1
