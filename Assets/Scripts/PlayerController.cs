@@ -97,7 +97,6 @@ public class PlayerController : MonoBehaviour {
 
         if (shield.GetComponent<ShieldController>().collision)
         {
-                
             Vector3 rot = shield.gameObject.transform.up;
             //Debug.Log(rot);
             
@@ -154,6 +153,18 @@ public class PlayerController : MonoBehaviour {
 
         if (bounceTimer < 10f)
             bounceTimer += Time.fixedDeltaTime;
+
+        if (Input.GetKeyDown("r"))
+        {
+            resetPlayer();
+        }
+
+ 
+
     }
 
+    void resetPlayer()
+    {
+        gameObject.transform.position = new Vector3(1, 0.5f, 1.23f);
+    }
 }

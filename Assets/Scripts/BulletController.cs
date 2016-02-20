@@ -32,12 +32,17 @@ public class BulletController : MonoBehaviour {
     void FixedUpdate()
     {
         float dotp = Vector3.Dot(playerRigid.velocity, dir);
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, dir, speed*2);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, dir, speed*3);
         if (hit.collider != null)
         {
             if (hit.collider.gameObject.tag == "Shield")
             {
                 dir = Vector3.Reflect(dir, hit.normal);
+                float angle = Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg;
+                print(angle);
+                if (angle >= 315 || angle <= -45)
+                    
+                    playerRigid.velocity = (-dir * playerControl.jumpPower * 2f);
             }
             if (hit.collider.gameObject.tag == "Floor")
             {
