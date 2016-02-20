@@ -26,11 +26,11 @@ public class TurretController : MonoBehaviour {
         {
             gun.GetComponent<Animator>().Play("Turret Animation");
             //gun.GetComponent<Animator>().Play("Turret Animation");
-            Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
             if (followTarget)
                 bullet.dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
             else
                 bullet.dir = direction;
+            Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
         }
         else
         {
