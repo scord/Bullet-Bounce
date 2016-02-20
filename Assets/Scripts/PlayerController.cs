@@ -33,11 +33,9 @@ public class PlayerController : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
         
 
-        rigidbody.velocity = new Vector2(speed * moveHorizontal, gameObject.GetComponent<Rigidbody2D>().velocity.y );
-        //sprite.transform.Rotate(new Vector3(0, 0, -2*speed * moveHorizontal));
-
-        if (moveHorizontal != 0)
+        if (Mathf.Abs(moveHorizontal) >= 0.1)
             rigidbody.velocity = new Vector2(speed * moveHorizontal, gameObject.GetComponent<Rigidbody2D>().velocity.y );
+
         sprite.transform.Rotate(new Vector3(0, 0, -2*speed * moveHorizontal));
 
         if (collider.IsTouchingLayers())
