@@ -61,6 +61,7 @@ public class BulletController : MonoBehaviour {
             if (hit.collider.gameObject.tag == "Power")
             {
                 hit.collider.gameObject.GetComponent<PowerBoxController>().Destroy();
+                Destroy(gameObject);
             }
             if (hit.collider.gameObject.tag == "Player")
             {

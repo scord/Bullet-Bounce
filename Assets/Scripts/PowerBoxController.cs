@@ -5,6 +5,10 @@ public class PowerBoxController : MonoBehaviour {
 
     bool destroyed = false;
     public GameObject explosion;
+    public GameObject smoke;
+    public GameObject door;
+    public Sprite broken;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -12,22 +16,24 @@ public class PowerBoxController : MonoBehaviour {
   
 	void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Bullet")
-        {
-            Destroy();    
-        }
+       
     }
 
     public void Destroy()
     {
-        Debug.Log("TEST");
-        destroyed = true;
-        transform.rotation = Quaternion.Euler(0, 0, 180);
-        explosion.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z -0.1f);
+        if (!destroyed)
+        {
+            Debug.Log("TEST");
+            destroyed = true;
 
-        GameObject e = Instantiate(explosion);
-  
-   
+            explosion.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.1f);
+            smoke.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.1f);
+            Instantiate(explosion);
+            Instantiate(smoke);
+            gameObject.GetComponent<SpriteRenderer>().sprite = broken;
+            door.gameObject.GetComponent<DoorController>().Open();
+            gameObject.GetComponent<AudioSource>().Play();
+        }
     }
 
 	// Update is called once per frame

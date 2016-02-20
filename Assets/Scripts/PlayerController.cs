@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject shield;
     bool grounded = false;
     public GameObject sprite;
+    AudioSource audio;
     float timer = 0f;
     float bounceTimer = 10f;
     Vector2 acceleration = Vector2.zero;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         collider = gameObject.GetComponent<Collider2D>();
-       
+        audio = gameObject.GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour {
         {
             Vector3 rot = shield.gameObject.transform.up;
             //Debug.Log(rot);
-            
+            audio.Play();
             rigidbody.velocity = (rot*jumpPower*2f);
             bounceTimer = 0;
         }
