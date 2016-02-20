@@ -70,12 +70,15 @@ public class BulletController : MonoBehaviour {
     {
         if (hit.collider.gameObject.tag == "Shield")
         {
+
             if (str == "front") {
                 dir = Vector3.Reflect(dir, hit.normal);
                 float angle = Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg;
                 print(angle);
                 if (angle >= 315 || angle <= -45)
                     playerRigid.velocity = (-dir * playerControl.jumpPower * 2f);
+                hit.collider.gameObject.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
+                hit.collider.gameObject.GetComponent<AudioSource>().Play();
             }
             else if (str == "above")
             {
@@ -103,6 +106,7 @@ public class BulletController : MonoBehaviour {
         else if (hit.collider.gameObject.tag == "Power")
         {
             hit.collider.gameObject.GetComponent<PowerBoxController>().Destroy();
+            Destroy(gameObject);
         }
         else if (hit.collider.gameObject.tag == "Player" && playerControl.getKillable())
         {
