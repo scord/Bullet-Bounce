@@ -865,10 +865,30 @@ Prefab:
       objectReference: {fileID: 705978306}
     - target: {fileID: 11441934, guid: fde95466fa4384649b3c481f09443478, type: 2}
       propertyPath: killable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 141400, guid: fde95466fa4384649b3c481f09443478, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826736, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826736, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21241856, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869866, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21253208, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

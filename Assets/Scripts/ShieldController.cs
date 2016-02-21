@@ -24,7 +24,6 @@ public class ShieldController : MonoBehaviour
 	void Update () {
        // Debug.Log(gameObject.transform.rotation);	
 	}
-    public int numRays = 10000;
 
     void FixedUpdate()
     {
