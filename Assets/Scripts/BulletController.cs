@@ -60,17 +60,15 @@ public class BulletController : MonoBehaviour {
             bulletCollision(hitside2, "below");
         }
         gameObject.transform.Translate(dir * speed);
-        if (gameObject.transform.position.magnitude > MAX_DISTANCE)
-        {
-            Destroy(gameObject);
-        }
+
     }
 
     void bulletCollision(RaycastHit2D hit, string str)
     {
+        Debug.Log(hit.collider.ToString());
         if (hit.collider.gameObject.tag == "Shield")
         {
-
+           
             if (str == "front") {
                 dir = Vector3.Reflect(dir, hit.normal);
                 float angle = Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg;
