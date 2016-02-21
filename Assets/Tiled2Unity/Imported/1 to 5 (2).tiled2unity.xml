@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Tiled2Unity generated xml data-->
+<!--Do not modify by hand-->
+<!--Last exported: 21/02/2016 15:11:03-->
+<Tiled2Unity version="1.0.4.2">
+  <Prefab name="1 to 5 (2)" numTilesWide="35" numTilesHigh="71" tileWidth="200" tileHeight="200" exportScale="0.005" mapWidthInPixels="7000" mapHeightInPixels="14200">
+    <GameObject name="Tile Layer 1" x="0" y="0" />
+    <GameObject name="Turrets" x="0" y="0">
+      <GameObject name="Level 4 Turret" x="21" y="-46" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+      <GameObject name="Level 5 Turret" x="21" y="-65" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Doors / Power" x="0" y="0">
+      <GameObject name="Level 5 Door" x="25" y="-60" rotation="0">
+        <BoxCollider2D width="1" height="2" />
+      </GameObject>
+      <GameObject name="Level 5 Power" x="23" y="-63" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Spawn / End Points" x="0" y="0">
+      <GameObject name="lvl 1 Spawn" x="12" y="-5" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+      <GameObject name="lvl 2 Spawn" x="14" y="-15" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+      <GameObject name="lvl 3 Spawn" x="10" y="-26" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+      <GameObject name="lvl 4 Spawn" x="7" y="-40" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+      <GameObject name="lvl 5 Spawn" x="6" y="-57" rotation="0">
+        <BoxCollider2D width="1" height="1" />
+      </GameObject>
+      <GameObject name="lvl 1 End" x="21" y="-8" rotation="0">
+        <BoxCollider2D width="2" height="1" />
+      </GameObject>
+      <GameObject name="lvl 2 End" x="24" y="-18" rotation="0">
+        <BoxCollider2D width="2" height="1" />
+      </GameObject>
+      <GameObject name="lvl 3 End" x="22" y="-32" rotation="0">
+        <BoxCollider2D width="2" height="1" />
+      </GameObject>
+      <GameObject name="lvl 4 End" x="25" y="-47" rotation="0">
+        <BoxCollider2D width="2" height="1" />
+      </GameObject>
+      <GameObject name="lvl 5 End" x="27" y="-62" rotation="0">
+        <BoxCollider2D width="2" height="1" />
+      </GameObject>
+    </GameObject>
+  </Prefab>
+  <ImportMesh filename="1 to 5 (2).obj">IyBXYXZlZnJvbnQgT0JKIGZpbGUgYXV0b21hdGljYWxseSBnZW5lcmF0ZWQgYnkgVGlsZWQyVW5pdHkNCg0KIyBWZXJ0aWNlcyAoQ291bnQgPSAwKQ0KDQojIFRleHR1cmUgY29vcmlkaW5hdGVzIChDb3VudCA9IDApDQoNCiMgTm9ybWFsDQp2biAwIDAgLTENCg0KIyBHcm91cHMgKENvdW50ID0gMSkNCg0K</ImportMesh>
+</Tiled2Unity>
