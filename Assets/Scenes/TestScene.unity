@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 0}
   bullet: {fileID: 11444596, guid: 014c3512553a1fa499378ac37f5993b2, type: 2}
-  repeatRate: 1
+  repeatRate: 0
   direction: {x: -1, y: -1, z: 0}
   followTarget: 1
 --- !u!212 &82260386
@@ -865,7 +865,7 @@ Prefab:
       objectReference: {fileID: 705978306}
     - target: {fileID: 11441934, guid: fde95466fa4384649b3c481f09443478, type: 2}
       propertyPath: killable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fde95466fa4384649b3c481f09443478, type: 2}
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 1272977918}
   bullet: {fileID: 11444596, guid: 014c3512553a1fa499378ac37f5993b2, type: 2}
-  repeatRate: 1
+  repeatRate: 0
   direction: {x: -1, y: 0, z: 0}
   followTarget: 0
 --- !u!212 &992720278
