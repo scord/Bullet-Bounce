@@ -13,6 +13,8 @@ public class BulletController : MonoBehaviour {
     Rigidbody2D playerRigid;
 
     public bool followTarget;
+    float hitTimer = 0f;
+    bool canHit = true;
     // Use this for initialization
     void Start () {
         coll = gameObject.GetComponent<Collider2D>();
@@ -37,81 +39,84 @@ public class BulletController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (!canHit)
+        {
+            hitTimer += Time.deltaTime;
+            if (hitTimer > 0.5f)
+            {
+                hitTimer = 0f;
+                canHit = true;
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        float dotp = Vector3.Dot(playerRigid.velocity, dir);
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, dir, speed*3);
+        if (playerRigid != null)
+        {
+            float dotp = Vector3.Dot(playerRigid.velocity, dir);
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, dir, speed * 3);
 
-        RaycastHit2D hitside1 = Physics2D.Raycast(gameObject.transform.position, Vector3.Cross(dir, Vector3.forward), speed);
-        RaycastHit2D hitside2 = Physics2D.Raycast(gameObject.transform.position, Vector3.Cross(dir, Vector3.back), speed);
-        if (hit.collider != null)
-        {
-            bulletCollision(hit, "front");
-        }
-        if (hitside1.collider != null)
-        {
-            bulletCollision(hitside1, "above");
-        }
-        if (hitside2.collider != null)
-        {
-            bulletCollision(hitside2, "below");
-        }
-        gameObject.transform.Translate(dir * speed);
-        if (gameObject.transform.position.magnitude > MAX_DISTANCE)
-        {
-            Destroy(gameObject);
+            RaycastHit2D hitside1 = Physics2D.Raycast(gameObject.transform.position, Vector3.Cross(dir, Vector3.forward), speed + Mathf.Abs(playerRigid.velocity.y) * Time.fixedDeltaTime);
+            RaycastHit2D hitside2 = Physics2D.Raycast(gameObject.transform.position, Vector3.Cross(dir, Vector3.back), speed);
+            if (hit.collider != null)
+            {
+                bulletCollision(hit, "front");
+            }
+            if (hitside1.collider != null)
+            {
+                bulletCollision(hitside1, "above");
+            }
+            if (hitside2.collider != null)
+            {
+                bulletCollision(hitside2, "below");
+            }
+            gameObject.transform.Translate(dir * speed);
         }
     }
 
     void bulletCollision(RaycastHit2D hit, string str)
     {
-        if (hit.collider.gameObject.tag == "Shield")
+        if (hit.collider.gameObject.tag == "Shield" && canHit)
         {
-
-            if (str == "front") {
+            if (str == "front")
+            {
                 dir = Vector3.Reflect(dir, hit.normal);
                 float angle = Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg;
-                print(angle);
-                if (angle >= 315 || angle <= -45)
+
+                if (angle >= 300 || angle <= -60)
                     playerRigid.velocity = (-dir * playerControl.jumpPower * 2f);
                 hit.collider.gameObject.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
                 hit.collider.gameObject.GetComponent<AudioSource>().Play();
             }
             else if (str == "above")
             {
-                playerRigid.velocity = (-dir * playerControl.jumpPower * 2f);
+                Vector3 rot = gameObject.transform.up;
+                playerRigid.velocity = (rot * playerControl.jumpPower * 2f);
                 dir = Quaternion.Euler(0, 0, 45) * dir;
             }
             else if (str == "below")
             {
-
-
-                hit.collider.gameObject.GetComponent<PowerBoxController>().Destroy();
-                Destroy(gameObject);
+                //playerRigid.velocity = (-dir * playerControl.jumpPower * 2f);
+                dir = Quaternion.Euler(0, 0, -45) * dir;
             }
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                hit.collider.gameObject.GetComponent<PlayerController>().Destroy();
-                Destroy(gameObject);
-
-            }
+            canHit = false;
         }
-        else if (hit.collider.gameObject.tag == "Floor")
+        else if (hit.collider.gameObject.tag == "Floor" && str != "front")
         {
             Destroy(gameObject);
         }
-        else if (hit.collider.gameObject.tag == "Power")
+        else if (hit.collider.gameObject.tag == "Power" && str != "front")
         {
             hit.collider.gameObject.GetComponent<PowerBoxController>().Destroy();
             Destroy(gameObject);
         }
-        else if (hit.collider.gameObject.tag == "Player" && playerControl.getKillable())
+        else if (hit.collider.gameObject.tag == "Player" && playerControl.getKillable() && canHit)
         {
             hit.collider.gameObject.GetComponent<PlayerController>().Destroy();
+            Destroy(player);
             Destroy(gameObject);
+            canHit = false;
         }
     }
 }

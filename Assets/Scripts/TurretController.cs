@@ -18,14 +18,15 @@ public class TurretController : MonoBehaviour {
         gun.GetComponent<Animator>().Play("Idle");
         player = GameObject.FindWithTag("Player");
         InvokeRepeating("Shoot", 2f, repeatRate);
+        
 	}
 
     void Shoot ()
     {
+        
         if (!disabled)
         {
             gun.GetComponent<Animator>().Play("Turret Animation");
-            //gun.GetComponent<Animator>().Play("Turret Animation");
             if (followTarget)
                 bullet.dir = Vector3.Normalize(player.transform.position - gameObject.transform.position);
             else
@@ -41,9 +42,13 @@ public class TurretController : MonoBehaviour {
     // Update is called once per frame
 	void Update ()
     {
-        if (followTarget)
+        if (player == null)
         {
-            direction = Vector3.Cross(GameObject.FindGameObjectWithTag("Player").transform.position - gameObject.transform.position, Vector3.forward);
+            CancelInvoke("Shoot");
+        }
+        else if (followTarget)
+        {
+            direction = Vector3.Cross(player.transform.position - gameObject.transform.position, Vector3.forward);
             gun.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         }
         if (disabled)

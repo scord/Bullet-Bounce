@@ -23,7 +23,6 @@ public class PowerBoxController : MonoBehaviour {
     {
         if (!destroyed)
         {
-            Debug.Log("TEST");
             destroyed = true;
 
             explosion.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.1f);

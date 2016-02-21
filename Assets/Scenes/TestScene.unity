@@ -867,6 +867,30 @@ Prefab:
       propertyPath: killable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 141400, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826736, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826736, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21241856, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869866, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21253208, guid: fde95466fa4384649b3c481f09443478, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fde95466fa4384649b3c481f09443478, type: 2}
   m_IsPrefabParent: 0
@@ -974,7 +998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 1272977918}
   bullet: {fileID: 11444596, guid: 014c3512553a1fa499378ac37f5993b2, type: 2}
-  repeatRate: 1
+  repeatRate: 0
   direction: {x: -1, y: 0, z: 0}
   followTarget: 0
 --- !u!212 &992720278
